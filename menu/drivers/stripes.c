@@ -3505,7 +3505,7 @@ static const char *stripes_texture_path(unsigned id)
    switch (id)
    {
       case STRIPES_TEXTURE_MAIN_MENU:
-#if defined(HAVE_LAKKA)
+#if defined(HAVE_LAKKA) || defined(HAVE_ODROIDGO2)
          return "lakka.png";
 #else
          return "retroarch.png";

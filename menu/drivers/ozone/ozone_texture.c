@@ -568,7 +568,7 @@ const char *ozone_entries_icon_texture_path(unsigned id)
 switch (id)
    {
       case OZONE_ENTRIES_ICONS_TEXTURE_MAIN_MENU:
-#if defined(HAVE_LAKKA)
+#if defined(HAVE_LAKKA) || defined(HAVE_ODROIDGO2)
          return "lakka.png";
 #else
          return "retroarch.png";
