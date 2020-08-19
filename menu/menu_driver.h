@@ -200,7 +200,7 @@ enum menu_settings_type
 #ifdef HAVE_LAKKA_SWITCH
    MENU_SET_SWITCH_GPU_PROFILE,
 #endif
-#if defined(HAVE_LAKKA_SWITCH) || defined(HAVE_LIBNX)
+#if defined(HAVE_LAKKA_SWITCH) || defined(HAVE_LIBNX) || defined(HAVE_ODROIDGO2)
    MENU_SET_SWITCH_CPU_PROFILE,
 #endif
 

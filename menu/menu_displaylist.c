@@ -59,6 +59,10 @@
 #include "../../switch_performance_profiles.h"
 #endif
 
+#ifdef HAVE_ODROIDGO2
+#include "../../odroidgo2.h"
+#endif
+
 #if defined(__linux__) || (defined(BSD) && !defined(__MACH__))
 #include "../frontend/drivers/platform_unix.h"
 #endif
@@ -9634,23 +9638,31 @@ bool menu_displaylist_ctl(enum menu_displaylist_ctl_state type,
          /* No-op */
          break;
 #endif
-#if defined(HAVE_LAKKA_SWITCH) || defined(HAVE_LIBNX)
+#if defined(HAVE_LAKKA_SWITCH) || defined(HAVE_LIBNX) || defined(HAVE_ODROIDGO2)
       case DISPLAYLIST_SWITCH_CPU_PROFILE:
       {
          unsigned i;
          char text[PATH_MAX_LENGTH];
-#ifdef HAVE_LAKKA_SWITCH
+#if defined(HAVE_LAKKA_SWITCH) || defined(HAVE_ODROIDGO2)
          char current_profile[PATH_MAX_LENGTH];
          FILE               *profile = NULL;
 #endif
          const size_t profiles_count = sizeof(SWITCH_CPU_PROFILES)/sizeof(SWITCH_CPU_PROFILES[1]);
 
+#if defined(HAVE_ODROIDGO2)
+         runloop_msg_queue_push("Warning : extended overclocking can damage the device", 1, 90, true, NULL, MESSAGE_QUEUE_ICON_DEFAULT, MESSAGE_QUEUE_CATEGORY_INFO);
+#else
          runloop_msg_queue_push("Warning : extended overclocking can damage the Switch", 1, 90, true, NULL, MESSAGE_QUEUE_ICON_DEFAULT, MESSAGE_QUEUE_CATEGORY_INFO);
+#endif
 
          menu_entries_ctl(MENU_ENTRIES_CTL_CLEAR, info->list);
 
+#if defined(HAVE_LAKKA_SWITCH) || defined(HAVE_ODROIDGO2)
 #ifdef HAVE_LAKKA_SWITCH
          profile = popen("cpu-profile get", "r");
+#else
+         profile = popen("cat /sys/devices/system/cpu/cpufreq/policy0/scaling_governor", "r");
+#endif
          fgets(current_profile, PATH_MAX_LENGTH, profile);
          pclose(profile);
 

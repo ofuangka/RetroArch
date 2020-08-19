@@ -4,7 +4,7 @@ MSG_HASH(
    "switch_gpu_profile"
    )
 #endif
-#if defined(HAVE_LAKKA_SWITCH) || defined(HAVE_LIBNX)
+#if defined(HAVE_LAKKA_SWITCH) || defined(HAVE_LIBNX) || defined(HAVE_ODROIDGO2)
 MSG_HASH(
    MENU_ENUM_LABEL_SWITCH_CPU_PROFILE,
    "switch_cpu_profile"

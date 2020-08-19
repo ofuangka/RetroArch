@@ -25,4 +25,16 @@
 #define LAKKA_CONNMAN_DIR    "/home/odroid/services/connman/"
 #define LAKKA_LOCALAP_PATH   "/home/odroid/services/localap.conf"
 
+static char *SWITCH_CPU_PROFILES[] = {
+  "performance",
+  "ondemand"
+};
+
+static char *SWITCH_CPU_SPEEDS[] = {
+  "1512 MHz",
+  "1008 MHz"
+};
+
+
+#define SWITCH_DEFAULT_CPU_PROFILE 1
 #endif

@@ -237,7 +237,7 @@ enum menu_displaylist_ctl_state
 #ifdef HAVE_LAKKA_SWITCH
    DISPLAYLIST_SWITCH_GPU_PROFILE,
 #endif
-#if defined(HAVE_LAKKA_SWITCH) || defined(HAVE_LIBNX)
+#if defined(HAVE_LAKKA_SWITCH) || defined(HAVE_LIBNX) || defined(HAVE_ODROIDGO2)
    DISPLAYLIST_SWITCH_CPU_PROFILE,
 #endif
    DISPLAYLIST_MANUAL_CONTENT_SCAN_LIST,

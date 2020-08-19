@@ -2710,7 +2710,7 @@ static uintptr_t xmb_icon_get_id(xmb_handle_t *xmb,
 #ifdef HAVE_LAKKA_SWITCH
       case MENU_ENUM_LABEL_SWITCH_GPU_PROFILE:
 #endif
-#if defined(HAVE_LAKKA_SWITCH) || defined(HAVE_LIBNX)
+#if defined(HAVE_LAKKA_SWITCH) || defined(HAVE_LIBNX) || defined(ODROIDGO2)
       case MENU_ENUM_LABEL_SWITCH_CPU_PROFILE:
          return xmb->textures.list[XMB_TEXTURE_POWER];
 #endif
@@ -6837,7 +6837,7 @@ static int xmb_list_push(void *data, void *userdata,
                menu_displaylist_setting(&entry);
             }
 
-#if defined(HAVE_LAKKA_SWITCH) || defined(HAVE_LIBNX)
+#if defined(HAVE_LAKKA_SWITCH) || defined(HAVE_LIBNX) || defined(HAVE_ODROIDGO2)
             entry.enum_idx      = MENU_ENUM_LABEL_SWITCH_CPU_PROFILE;
             menu_displaylist_setting(&entry);
 #endif

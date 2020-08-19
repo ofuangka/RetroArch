@@ -11908,14 +11908,18 @@ MSG_HASH(
    "Reboot into RCM"
    )
 #endif
-#if defined(HAVE_LAKKA_SWITCH) || defined(HAVE_LIBNX)
+#if defined(HAVE_LAKKA_SWITCH) || defined(HAVE_LIBNX) || defined(HAVE_ODROIDGO2)
 MSG_HASH(
    MENU_ENUM_LABEL_VALUE_SWITCH_CPU_PROFILE,
    "CPU Overclock"
    )
 MSG_HASH(
    MENU_ENUM_SUBLABEL_SWITCH_CPU_PROFILE,
+#ifdef HAVE_ODROIDGO2
+   "Overlock the CPU."
+#else
    "Overclock the Switch CPU."
+#endif
    )
 #endif
 #if defined(HAVE_LAKKA) || defined(HAVE_ODROIDGO2)
