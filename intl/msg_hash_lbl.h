@@ -190,7 +190,7 @@ MSG_HASH(
    MENU_ENUM_LABEL_BLOCK_SRAM_OVERWRITE,
    "block_sram_overwrite"
    )
-#ifdef HAVE_LAKKA
+#if defined(HAVE_LAKKA) || defined(HAVE_ODROIDGO2)
 MSG_HASH(
    MENU_ENUM_LABEL_BLUETOOTH_ENABLE,
    "bluetooth_enable"
@@ -2582,7 +2582,7 @@ MSG_HASH(
    MENU_ENUM_LABEL_RUN_MUSIC,
    "collection_music"
    )
-#ifdef HAVE_LAKKA
+#if defined(HAVE_LAKKA) || defined(HAVE_ODROIDGO2)
 MSG_HASH(
    MENU_ENUM_LABEL_SAMBA_ENABLE,
    "samba_enable"
@@ -2772,7 +2772,7 @@ MSG_HASH(
    MENU_ENUM_LABEL_SCREENSHOTS_IN_CONTENT_DIR_ENABLE,
    "screenshots_in_content_dir_enable"
    )
-#ifdef HAVE_LAKKA
+#if defined(HAVE_LAKKA) || defined(HAVE_ODROIDGO2)
 MSG_HASH(
    MENU_ENUM_LABEL_SSH_ENABLE,
    "ssh_enable"
@@ -4724,7 +4724,7 @@ MSG_HASH(
    MENU_ENUM_LABEL_DELETE_PLAYLIST,
    "delete_playlist"
    )
-#ifdef HAVE_LAKKA
+#if defined(HAVE_LAKKA) || defined(HAVE_ODROIDGO2)
 MSG_HASH(
    MENU_ENUM_LABEL_LOCALAP_ENABLE,
    "localap_enable"

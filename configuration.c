@@ -45,7 +45,12 @@
 #include "paths.h"
 #include "retroarch.h"
 #include "verbosity.h"
+#ifdef HAVE_LAKKA
 #include "lakka.h"
+#endif
+#ifdef HAVE_ODROIDGO2
+#include "odroidgo2.h"
+#endif
 
 #include "gfx/gfx_animation.h"
 
@@ -516,7 +521,7 @@ static const enum bluetooth_driver_enum BLUETOOTH_DEFAULT_DRIVER = BLUETOOTH_BLU
 static const enum bluetooth_driver_enum BLUETOOTH_DEFAULT_DRIVER = BLUETOOTH_NULL;
 #endif
 
-#if defined(HAVE_LAKKA)
+#if defined(HAVE_LAKKA) || defined(HAVE_ODROIDGO2)
 static const enum wifi_driver_enum WIFI_DEFAULT_DRIVER = WIFI_CONNMANCTL;
 #else
 static const enum wifi_driver_enum WIFI_DEFAULT_DRIVER = WIFI_NULL;
@@ -2313,7 +2318,7 @@ void config_set_defaults(void *data)
    audio_set_float(AUDIO_ACTION_MIXER_VOLUME_GAIN, settings->floats.audio_mixer_volume);
 #endif
 
-#ifdef HAVE_LAKKA
+#if defined(HAVE_LAKKA) || defined(HAVE_ODROIDGO2)
    configuration_set_bool(settings,
          settings->bools.ssh_enable, filestream_exists(LAKKA_SSH_PATH));
    configuration_set_bool(settings,
@@ -3325,7 +3330,7 @@ static bool config_load_file(global_t *global,
    if (settings->floats.fastforward_ratio < 0.0f)
       configuration_set_float(settings, settings->floats.fastforward_ratio, 0.0f);
 
-#ifdef HAVE_LAKKA
+#if defined(HAVE_LAKKA) || defined(HAVE_ODROIDGO2)
    configuration_set_bool(settings,
          settings->bools.ssh_enable, filestream_exists(LAKKA_SSH_PATH));
    configuration_set_bool(settings,
@@ -4130,7 +4135,7 @@ bool config_save_file(const char *path)
 
    video_driver_save_settings(conf);
 
-#ifdef HAVE_LAKKA
+#if defined(HAVE_LAKKA) || defined(HAVE_ODROIDGO2)
    if (settings->bools.ssh_enable)
       filestream_close(filestream_open(LAKKA_SSH_PATH,
                RETRO_VFS_FILE_ACCESS_WRITE,

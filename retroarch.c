@@ -8095,7 +8095,7 @@ struct string_list *string_list_new_special(enum string_list_type type,
          }
          break;
       case STRING_LIST_BLUETOOTH_DRIVERS:
-#ifdef HAVE_BLUETOOTH
+#if defined(HAVE_LAKKA) || defined(HAVE_ODROIDGO2)
          for (i = 0; bluetooth_drivers[i]; i++)
          {
             const char *opt  = bluetooth_drivers[i]->ident;
@@ -8106,7 +8106,7 @@ struct string_list *string_list_new_special(enum string_list_type type,
          break;
 #endif
       case STRING_LIST_WIFI_DRIVERS:
-#ifdef HAVE_WIFI
+#if defined(HAVE_LAKKA) || defined(HAVE_ODROIDGO2)
          for (i = 0; wifi_drivers[i]; i++)
          {
             const char *opt  = wifi_drivers[i]->ident;

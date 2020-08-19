@@ -2192,7 +2192,7 @@ static int menu_displaylist_parse_settings_internal_enum(
       uint64_t flags = setting->flags;
       if (flags & SD_FLAG_ADVANCED)
          goto end;
-#ifdef HAVE_LAKKA
+#if defined(HAVE_LAKKA) || defined(HAVE_ODROIDGO2)
       if (flags & SD_FLAG_LAKKA_ADVANCED)
          goto end;
 #endif
@@ -2450,7 +2450,7 @@ static int menu_displaylist_parse_load_content_settings(
 
    if (!rarch_ctl(RARCH_CTL_IS_DUMMY_CORE, NULL))
    {
-#ifdef HAVE_LAKKA
+#if defined(HAVE_LAKKA) || defined(HAVE_ODROIDGO2)
       bool show_advanced_settings         = settings->bools.menu_show_advanced_settings;
 #endif
       bool quickmenu_show_resume_content  = settings->bools.quick_menu_show_resume_content;
@@ -7517,7 +7517,7 @@ unsigned menu_displaylist_build_list(
             }
          }
          break;
-#ifdef HAVE_LAKKA
+#if defined(HAVE_LAKKA) || defined(HAVE_ODROIDGO2)
       case DISPLAYLIST_LAKKA_SERVICES_LIST:
          {
             menu_displaylist_build_info_t build_list[] = {
@@ -8568,7 +8568,7 @@ unsigned menu_displaylist_build_list(
 #ifdef HAVE_BLUETOOTH
                {MENU_ENUM_LABEL_BLUETOOTH_DRIVER,      PARSE_ONLY_STRING_OPTIONS},
 #endif
-#ifdef HAVE_LAKKA
+#if defined(HAVE_LAKKA) || defined(HAVE_ODROIDGO2)
                {MENU_ENUM_LABEL_WIFI_DRIVER,           PARSE_ONLY_STRING_OPTIONS},
 #endif
             };

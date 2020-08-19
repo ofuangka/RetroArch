@@ -83,7 +83,12 @@
 #include "../ui/ui_companion_driver.h"
 #include "../performance_counters.h"
 #include "../setting_list.h"
+#ifdef HAVE_LAKKA
 #include "../lakka.h"
+#endif
+#ifdef HAVE_ODROIDGO2
+#include "../odroidgo2.h"
+#endif
 #include "../retroarch.h"
 #include "../gfx/video_display_server.h"
 #ifdef HAVE_CHEATS
@@ -7630,7 +7635,7 @@ static void update_streaming_url_write_handler(rarch_setting_t *setting)
    recording_driver_update_streaming_url();
 }
 
-#ifdef HAVE_LAKKA
+#if defined(HAVE_LAKKA) || defined(HAVE_ODROIDGO2)
 static void systemd_service_toggle(const char *path, char *unit, bool enable)
 {
    int      pid = fork();
@@ -7664,8 +7669,10 @@ static void ssh_enable_toggle_change_handler(void *data)
    if (ssh_enable)
       enable             = true;
 
+#if defined(HAVE_LAKKA) || defined(HAVE_ODROIDGO2)
    systemd_service_toggle(LAKKA_SSH_PATH, (char*)"sshd.service",
          enable);
+#endif
 }
 
 static void samba_enable_toggle_change_handler(void *data)
@@ -7677,8 +7684,10 @@ static void samba_enable_toggle_change_handler(void *data)
    if (samba_enable)
       enable = true;
 
+#if defined(HAVE_LAKKA) || defined(HAVE_ODROIDGO2)
    systemd_service_toggle(LAKKA_SAMBA_PATH, (char*)"smbd.service",
          enable);
+#endif
 }
 
 static void bluetooth_enable_toggle_change_handler(void *data)
@@ -7689,8 +7698,10 @@ static void bluetooth_enable_toggle_change_handler(void *data)
    if (settings && settings->bools.bluetooth_enable)
       enable = true;
 
+#if defined(HAVE_LAKKA) || defined(HAVE_ODROIDGO2)
    systemd_service_toggle(LAKKA_BLUETOOTH_PATH, (char*)"bluetooth.service",
          enable);
+#endif
 }
 
 static void localap_enable_toggle_change_handler(void *data)
@@ -7701,7 +7712,9 @@ static void localap_enable_toggle_change_handler(void *data)
    if (settings && settings->bools.localap_enable)
       enable = true;
 
+#if defined(HAVE_LAKKA) || defined(HAVE_ODROIDGO2)
    driver_wifi_tether_start_stop(enable, LAKKA_LOCALAP_PATH);
+#endif
 }
 #endif
 
@@ -8267,7 +8280,7 @@ static bool setting_append_list(
                &subgroup_info,
                parent_group);
 
-#if !defined(IOS) && !defined(HAVE_LAKKA)
+#if !defined(IOS) && !defined(HAVE_LAKKA) && !defined(HAVE_ODROIDGO2)
          if (frontend_driver_has_fork())
          {
             CONFIG_ACTION(
@@ -8379,7 +8392,7 @@ static bool setting_append_list(
 #endif
 #if !defined(IOS)
          /* Apple rejects iOS apps that let you forcibly quit them. */
-#ifdef HAVE_LAKKA
+#if defined(HAVE_LAKKA) || defined(HAVE_ODROIDGO2)
          CONFIG_ACTION(
                list, list_info,
                MENU_ENUM_LABEL_QUIT_RETROARCH,
@@ -8409,7 +8422,7 @@ static bool setting_append_list(
               parent_group);
 #endif
 
-#if defined(HAVE_LAKKA)
+#if defined(HAVE_LAKKA) || defined(HAVE_ODROIDGO2)
 #ifdef HAVE_LAKKA_SWITCH
         CONFIG_ACTION(
                list, list_info,
@@ -8757,11 +8770,9 @@ static bool setting_append_list(
                &group_info,
                &subgroup_info,
                parent_group);
-#ifdef HAVE_LAKKA
+#if defined(HAVE_LAKKA) || defined(HAVE_ODROIDGO2)
          SETTINGS_DATA_LIST_CURRENT_ADD_FLAGS(list, list_info, SD_FLAG_ADVANCED);
-#endif
 
-#ifdef HAVE_BLUETOOTH
          if (string_is_not_equal(settings->arrays.bluetooth_driver, "null"))
          {
             CONFIG_ACTION(
@@ -8772,9 +8783,6 @@ static bool setting_append_list(
                   &subgroup_info,
                   parent_group);
          }
-#endif
-
-#ifdef HAVE_LAKKA
          if (string_is_not_equal(settings->arrays.wifi_driver, "null"))
          {
             CONFIG_ACTION(
@@ -8796,7 +8804,7 @@ static bool setting_append_list(
                parent_group);
          SETTINGS_DATA_LIST_CURRENT_ADD_FLAGS(list, list_info, SD_FLAG_LAKKA_ADVANCED);
 
-#ifdef HAVE_LAKKA
+#if defined(HAVE_LAKKA) || defined(HAVE_ODROIDGO2)
          CONFIG_ACTION(
                list, list_info,
                MENU_ENUM_LABEL_LAKKA_SERVICES,
@@ -14815,7 +14823,7 @@ static bool setting_append_list(
                   general_read_handler,
                   SD_FLAG_LAKKA_ADVANCED);
 
-#ifdef HAVE_LAKKA
+#if defined(HAVE_LAKKA) || defined(HAVE_ODROIDGO2)
             CONFIG_BOOL(
                   list, list_info,
                   &settings->bools.menu_show_quit_retroarch,
@@ -17926,7 +17934,7 @@ static bool setting_append_list(
          break;
       case SETTINGS_LIST_LAKKA_SERVICES:
          {
-#if defined(HAVE_LAKKA)
+#if defined(HAVE_LAKKA) || defined(HAVE_ODROIDGO2)
             START_GROUP(list, list_info, &group_info,
                   msg_hash_to_str(MENU_ENUM_LABEL_VALUE_LAKKA_SERVICES),
                   parent_group);

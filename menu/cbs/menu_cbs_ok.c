@@ -72,7 +72,12 @@
 #include "../../playlist.h"
 #include "../../retroarch.h"
 #include "../../verbosity.h"
+#ifdef HAVE_LAKKA
 #include "../../lakka.h"
+#endif
+#ifdef HAVE_ODROIDGO2
+#include "../../odroidgo2.h"
+#endif
 #include "../../bluetooth/bluetooth_driver.h"
 #include "../../gfx/video_display_server.h"
 #include "../../manual_content_scan.h"

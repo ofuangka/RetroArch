@@ -24,7 +24,12 @@
 #include <time.h>
 #include "../wifi_driver.h"
 #include "../../retroarch.h"
+#ifdef HAVE_LAKKA
 #include "../../lakka.h"
+#endif
+#ifdef HAVE_ODROIDGO2
+#include "../../odroidgo2.h"
+#endif
 #ifdef HAVE_GFX_WIDGETS
 #include "../../gfx/gfx_widgets.h"
 #endif

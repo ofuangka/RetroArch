@@ -1247,7 +1247,7 @@ BLUETOOTH
 /*============================================================
 WIFI
 ============================================================ */
-#ifdef HAVE_LAKKA
+#if defined(HAVE_LAKKA) || defined(HAVE_ODROIDGO2)
 #include "../wifi/drivers/connmanctl.c"
 #endif
 

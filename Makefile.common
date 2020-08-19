@@ -754,6 +754,10 @@ ifeq ($(HAVE_LAKKA), 1)
    OBJ += wifi/drivers/connmanctl.o
 endif
 
+ifeq ($(HAVE_ODROIDGO2), 1)
+   OBJ += wifi/drivers/connmanctl.o
+endif
+
 # Audio
 
 ifeq ($(HAVE_COREAUDIO), 1)
